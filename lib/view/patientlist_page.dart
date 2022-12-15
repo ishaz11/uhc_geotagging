@@ -45,7 +45,7 @@ class _PatientListState extends State<PatientList> {
               return ListTile(
                 title: Text(households![index].headofFamily.toString()),
                 subtitle: Text(households![index].address.toString()),
-                trailing: const Icon(Icons.arrow_right),
+                trailing: const Icon(Icons.arrow_downward),
               );
             }),
       ),
