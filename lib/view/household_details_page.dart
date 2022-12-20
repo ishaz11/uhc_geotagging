@@ -85,6 +85,7 @@ class _HouseholddetailsState extends State<Householddetails> {
       'Latitude': position.latitude.toString(),
       'Longitude': position.longitude.toString(),
     });
+    debugPrint(response.statusCode.toString());
     if (response.statusCode == 200) {
       setState(() {
         widget.household?.latitude = position.latitude;
@@ -118,10 +119,19 @@ class _HouseholddetailsState extends State<Householddetails> {
             ),
           ),
           ListTile(
-            title:
-                Text(widget.household?.longitude.toString() ?? 'Not Available'),
-            leading: icon,
-          ),
+              title: Text(widget.household?.longitude == null
+                      ? 'Location not yet set.'
+                      : '${widget.household!.longitude}, ${widget.household!.latitude}'
+                  // widget.household?.longitude.toString().isEmpty() ?? 'Not Available'
+                  ),
+              leading: Icon(
+                widget.household?.longitude == null
+                    ? Icons.location_off
+                    : Icons.location_on,
+                color: widget.household?.longitude == null
+                    ? Colors.red
+                    : Colors.red,
+              )),
           ElevatedButton(
               onPressed: () {
                 checkLat();

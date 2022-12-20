@@ -23,17 +23,21 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  var _passwordVisilble = false;
+  var _passwordVisilble = true;
 
   void _btnLogin(String username, String Password) async {
+    debugPrint(username);
+    debugPrint('password is $Password');
     Timer(const Duration(seconds: 3), () async {
+      // var uri = 'http://10.222.81.108:45455/api/geoTagLogin';
       var uri = 'http://uhcsocot20222-001-site1.dtempurl.com/api/geoTagLogin';
+
       try {
         Response response = await post(Uri.parse(uri), body: {
-          'username': username,
+          'Username': username,
           'Password': Password,
         });
-        print(response.statusCode);
+        print('status is ' + response.statusCode.toString());
         if (response.statusCode == 200) {
           var json = jsonDecode(response.body);
 
@@ -91,7 +95,7 @@ class _LoginViewState extends State<LoginView> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   suffixIcon: IconButton(
-                    icon: Icon(_passwordVisilble
+                    icon: Icon(_passwordVisilble == true
                         ? Icons.visibility
                         : Icons.visibility_off),
                     onPressed: () {
