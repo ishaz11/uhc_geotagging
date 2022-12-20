@@ -29,14 +29,14 @@ class _PatientListState extends State<PatientList> {
     }
   }
 
-  // showHouseholdDetails(BuildContext contexxt, Household myHousehold) async {
-  //   var hh = myHousehold;
-  //   Navigator.push(
-  //       contexxt,
-  //       MaterialPageRoute(
-  //           builder: (context) => Householddetails(hh),
-  //           settings: RouteSettings(arguments: myHousehold)));
-  // }
+  Widget checkLoc(var loc) {
+    if (loc == null) {
+      return const Icon(Icons.check_circle_outlined);
+    } else {
+      return const Icon(Icons.check_circle);
+    }
+    // return const Icon(Icons.task_alt);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _PatientListState extends State<PatientList> {
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
-                  leading: const Icon(Icons.task_alt),
+                  leading: checkLoc(households?[index].longitude),
                   title: Text(households![index].residenceName.toString()),
                   subtitle: Text(households![index].address.toString()),
                   trailing: const Icon(Icons.keyboard_arrow_right),
@@ -64,7 +64,13 @@ class _PatientListState extends State<PatientList> {
                         MaterialPageRoute(
                             builder: (context) => Householddetails(
                                   household: households![index],
-                                )));
+                                ))).then((_) {
+                      // This block runs when you have returned back to the 1st Page from 2nd.
+                      setState(() {
+                        // Call setState to refresh the page.
+                        getHousehold();
+                      });
+                    });
                   },
                 ),
               );
