@@ -65,17 +65,19 @@ class _HouseholddetailsState extends State<Householddetails> {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
+    // return await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   void checkLat() async {
-    _determinePosition();
+    Position position = await _determinePosition();
     // await Geolocator.checkPermission();
     // await Geolocator.requestPermission();
 
     // debugPrint(pos.toString());
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    // Position position = await Geolocator.getCurrentPosition(
+    //     desiredAccuracy: LocationAccuracy.high);
 
     var uri = 'http://uhcsocot20222-001-site1.dtempurl.com/api/UpdateLocation';
     Response response = await post(Uri.parse(uri), body: {

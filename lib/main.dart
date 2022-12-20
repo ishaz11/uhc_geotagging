@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uhc_geoteagging/view/login_pate.dart';
 import 'package:uhc_geoteagging/view/patientlist_page.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const PatientList(),
+      home: const LoginView(),
     );
   }
 }
